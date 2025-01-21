@@ -1,4 +1,4 @@
-// Felix Oliveira-Machado, Divaey Kumar, Maryam Badalyengejeh
+// Felix Oliveira-Machado, Maryam Badalyengejeh, Divaey Kumar
 //1/21/25
 //Assigment to update blackjack
 
@@ -14,6 +14,10 @@ public class BlackJack {
             "Ace" };
     private static final int[] DECK = new int[52];
     private static int currentCardIndex = 0;
+
+    //These are the counters that will be used for the Dealer wins and Player wins
+    private static int playerWins = 0;
+    private static int dealerWins = 0;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -109,6 +113,7 @@ public class BlackJack {
     private static void determineWinner(int playerTotal, int dealerTotal) {
         if (dealerTotal > 21 || playerTotal > dealerTotal) {
             System.out.println("You win!");
+            playerWins += 1;
         } else if (dealerTotal == playerTotal) {
             System.out.println("It's a tie!");
         } else {
@@ -132,5 +137,8 @@ public class BlackJack {
             }
         }
         return -1; // not found 
+
+        //Checking if playerWins Works
+        System.out.println(playerWins);
     }
 }
