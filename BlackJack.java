@@ -10,8 +10,8 @@ public class BlackJack {
     //constants - cannot change their values 
     //static - I can use these in every function without having to pass them in 
     private static final String[] SUITS = { "Hearts", "Diamonds", "Clubs", "Spades" };
-    private static final String[] RANKS = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King",
-            "Ace" };
+    private static final String[] RANKS = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King","Ace" };
+
     private static final int[] DECK = new int[52];
     private static int currentCardIndex = 0;
 
@@ -22,6 +22,10 @@ public class BlackJack {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        boolean playAgain = true;
+
+        //While playAgain is true the code will continue to loop
+        while (playAgain)
         initializeDeck();
         shuffleDeck();
 
@@ -32,15 +36,23 @@ public class BlackJack {
         playerTotal = playerTurn(scanner, playerTotal);
         if (playerTotal > 21) { // if the player total is greater than 21 do the following command
             System.out.println("You busted! Dealer wins.");  //Displays message when player has lost 
-            return;
+            dealerWins++; //This adds to the dealer win count
         }
-
-        dealerTotal = dealerTurn(dealerTotal);
-        determineWinner(playerTotal, dealerTotal); 
+        else {
+            dealerTotal = dealerTurn(dealerTotal);
+            if (determineWinner(playerTotal, dealerTotal)) {
+                playerWins++; // Adds to the player win total
+            }
+            else {
+                dealerWins++; //Adds to the dealer win total
+            }
+            // THIS IS WHERE I LIFT OFF LOOK HERE???????????????????????????????????????????????????
 
         scanner.close(); // closes the scanner 
+        System.out.println("Thanks for playing");
     }
 
+    // THE WHILE LOOP PORTION GOES BEFORE THIS BLOCK
     // loops through deck of cards array 
     private static void initializeDeck() {
         for (int i = 0; i < DECK.length; i++) {
@@ -136,9 +148,10 @@ public class BlackJack {
                 return i;
             }
         }
-        return -1; // not found 
 
         //Checking if playerWins Works
         System.out.println(playerWins);
+        return -1; // not found 
+
     }
 }
